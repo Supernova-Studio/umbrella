@@ -5,6 +5,7 @@ import 'package:glob/glob.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:umbrella_annotation/umbrella_annotation.dart';
 import 'package:umbrella_generator/src/exporter/code_exporter.dart';
+import 'package:umbrella_generator/src/reader/header_annotation_reader.dart';
 
 const _moduleAnnotationChecker = TypeChecker.fromRuntime(Header);
 
@@ -30,7 +31,7 @@ class HeaderGenerator extends Generator {
     }
 
     // Read the annotation values
-    final headerAnnotation = _readHeaderAnnotation(ConstantReader(annotationsOnLibrary.first));
+    final headerAnnotation = HeaderAnnotationReader.read(ConstantReader(annotationsOnLibrary.first));
 
     // Find all exportable items
     final exportableItems = await _scanExportableItems(buildStep, headerAnnotation);
@@ -44,14 +45,6 @@ class HeaderGenerator extends Generator {
         .join("\n") + "\n";
   }
 }
-
-Header _readHeaderAnnotation(ConstantReader constantReader) {
-  final globValue = constantReader.read("glob");
-  return Header(
-    glob: globValue.isNull ? null : globValue.stringValue,
-  );
-}
-
 
 Future<List<Uri>> _scanExportableItems(BuildStep buildStep, Header headerAnnotation) async {
 
