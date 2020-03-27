@@ -16,7 +16,7 @@ dependencies:
   glob: ^1.2.0
 
   umbrella_annotation:
-    path: ./annotation
+    path: annotation
 
 dev_dependencies:
   build_test: ^0.10.0
