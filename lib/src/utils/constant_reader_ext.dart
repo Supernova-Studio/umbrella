@@ -16,3 +16,4 @@ extension ConstantReaderExtension on ConstantReader {
 }
 
 String asString(ConstantReader reader) => reader.stringValue;
+bool asBool(ConstantReader reader) => reader.boolValue;

@@ -441,7 +441,7 @@ packages:
     description:
       path: annotation
       ref: HEAD
-      resolved-ref: "00fa5c7a07772d290ef22e8266cb2eedde378863"
+      resolved-ref: dc464bab85cf4e990731ba379cf05d325da1b244
       url: "git://github.com/Supernova-Studio/umbrella"
     source: git
     version: "0.0.1"

@@ -57,7 +57,22 @@ Future<List<Uri>> _scanExportableItems(BuildStep buildStep, Header headerAnnotat
       continue;
     }
 
-    librariesToExport.add(assetId.uri);
+    final fileUri = assetId.uri;
+    final fileName = fileUri.pathSegments.last;
+
+    if (fileName == null || fileName.isEmpty) {
+      throw StateError("Invalid asset uri: ${fileUri}");
+    }
+
+    if (headerAnnotation.ignorePrivateFiles && fileName.startsWith("_")) {
+      continue;
+    }
+
+    if (headerAnnotation.ignoreGeneratedFiles && fileName.endsWith(".g.dart")) {
+      continue;
+    }
+
+    librariesToExport.add(fileUri);
   }
 
   return librariesToExport;
