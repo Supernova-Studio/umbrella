@@ -18,7 +18,6 @@ class HeaderGenerator extends Generator {
     print("Found ${annotationsOnLibrary.length} annotations on ${library.element.librarySource.uri}");
 
     if (annotationsOnLibrary.isEmpty) {
-      print("DEBUG: SKIPPING");
       // Silently ignore
       return null;
     }
@@ -35,8 +34,6 @@ class HeaderGenerator extends Generator {
 
     // Find all exportable items
     final exportableItems = await _scanExportableItems(buildStep, headerAnnotation);
-
-    print("DEBUG: Exporting ${exportableItems.length}");
 
     // Generate header file contents from file paths, ignore the path of the header file itself
     return exportableItems
