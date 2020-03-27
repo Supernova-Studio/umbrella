@@ -484,8 +484,10 @@ packages:
     dependency: "direct main"
     description:
       path: annotation
-      relative: true
-    source: path
+      ref: HEAD
+      resolved-ref: "94767c52372caef06e966b1d6ba3ff506b07eeee"
+      url: "git://github.com/Supernova-Studio/umbrella"
+    source: git
     version: "0.0.1"
   vector_math:
     dependency: transitive
