@@ -439,9 +439,11 @@ packages:
   umbrella_annotation:
     dependency: "direct main"
     description:
-      path: "../annotation"
-      relative: true
-    source: path
+      path: annotation
+      ref: HEAD
+      resolved-ref: "00fa5c7a07772d290ef22e8266cb2eedde378863"
+      url: "git://github.com/Supernova-Studio/umbrella"
+    source: git
     version: "0.0.1"
   umbrella_generator:
     dependency: "direct dev"

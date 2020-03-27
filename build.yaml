@@ -2,6 +2,6 @@ builders:
   header_generator:
     import: "package:umbrella_generator/builder.dart"
     builder_factories: ["headerGeneratorBuilder"]
-    build_extensions: {".dart": [".g.dart"]}
+    build_extensions: {".dart": ["header.g.dart"]}
     auto_apply: dependents
     build_to: source

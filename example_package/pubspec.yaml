@@ -12,7 +12,9 @@ dependencies:
     sdk: flutter
 
   umbrella_annotation:
-    path: ../annotation
+    git:
+      url: git://github.com/Supernova-Studio/umbrella
+      path: annotation
 
 
 dev_dependencies:
