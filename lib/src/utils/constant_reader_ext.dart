@@ -13,6 +13,10 @@ extension ConstantReaderExtension on ConstantReader {
   }
 
   T readTyped<T>(String field, ValueConverter<T> converter) => converter(this.read(field));
+
+  List<T> readTypedList<T>(String field, ValueConverter<T> converter) {
+    return this.read(field).listValue.map((e) => converter(ConstantReader(e))).toList();
+  }
 }
 
 String asString(ConstantReader reader) => reader.stringValue;

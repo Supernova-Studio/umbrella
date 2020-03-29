@@ -12,7 +12,6 @@ class LogEntry {
 }
 
 class LogStorage {
-
   final List<LogEntry> _entries = [];
 
   bool get isNotEmpty {
@@ -25,7 +24,7 @@ class LogStorage {
 
   String assembleMessage(LogLevel level) {
     final levelsToAssemble = _logLevelsToAssemble(level);
-    return this._entries.where((element) => levelsToAssemble.contains(element.level)).join("\n");
+    return this._entries.where((element) => levelsToAssemble.contains(element.level)).map((e) => e.message).join("\n");
   }
 
   void clear() {

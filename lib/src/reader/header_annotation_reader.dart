@@ -5,7 +5,8 @@ import 'package:umbrella_generator/src/utils/constant_reader_ext.dart';
 class HeaderAnnotationReader {
   static Header read(ConstantReader reader) {
     return Header(
-      glob: reader.readTyped("glob", asString),
+      include: reader.readTypedList("include", asString),
+      exclude: reader.readTypedList("exclude", asString),
       ignoreGeneratedFiles: reader.readTyped("ignoreGeneratedFiles", asBool),
       ignorePrivateFiles: reader.readTyped("ignorePrivateFiles", asBool),
     );

@@ -5,5 +5,4 @@
 // **************************************************************************
 
 export 'package:examplepackage/src/_private_file.dart';
-export 'package:examplepackage/src/new_file.dart';
 export 'package:examplepackage/src/public_file.dart';
