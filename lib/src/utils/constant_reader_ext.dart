@@ -7,7 +7,7 @@ extension ConstantReaderExtension on ConstantReader {
     return readTyped(field, asString);
   }
 
-  T readTypedOptional<T>(String field, ValueConverter<T> converter) {
+  T? readTypedOptional<T>(String field, ValueConverter<T> converter) {
     final value = this.read(field);
     return value.isNull ? null : converter(value);
   }
