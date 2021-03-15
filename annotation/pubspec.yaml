@@ -1,19 +1,7 @@
 name: umbrella_annotation
 description: Set of annotations for Umbrella generator package.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/Supernova-Studio/umbrella
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
-
-dependencies:
-  flutter:
-    sdk: flutter
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-# The following section is specific to Flutter.
-flutter:
-
