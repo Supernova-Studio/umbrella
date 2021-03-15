@@ -1,6 +1,6 @@
 name: umbrella_annotation
 description: Set of annotations for Umbrella generator package.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/Supernova-Studio/umbrella
 
 environment:
