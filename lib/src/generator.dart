@@ -29,7 +29,7 @@ class HeaderGenerator extends Generator {
 
 Future<String> _processLibrary(LibraryReader library, BuildStep buildStep) async {
   final logStorage = LogStorage();
-  String output;
+  String output = "";
 
   final annotationsOnLibrary = _moduleAnnotationChecker.annotationsOf(library.element);
   logStorage.add(
@@ -80,7 +80,7 @@ Future<String> _processLibrary(LibraryReader library, BuildStep buildStep) async
 Future<List<Uri>> _scanExportableItems(BuildStep buildStep, Header headerAnnotation, LogStorage logStorage) async {
 
   Glob include;
-  Glob exclude;
+  Glob? exclude;
 
   if (headerAnnotation.include.isEmpty) {
     logStorage.add(LogLevel.warning, "Found empty `include` glob list within @Header annotation, "
@@ -130,7 +130,7 @@ Future<List<Uri>> _scanExportableItems(BuildStep buildStep, Header headerAnnotat
   return librariesToExport;
 }
 
-Future<Uri> _analyzeAsset(AssetId assetId, Header headerAnnotation, BuildStep buildStep, LogStorage logStorage) async {
+Future<Uri?> _analyzeAsset(AssetId assetId, Header headerAnnotation, BuildStep buildStep, LogStorage logStorage) async {
   // Extract Uri from the asset id
   final fileUri = assetId.uri;
   final fileName = fileUri.pathSegments.last;
