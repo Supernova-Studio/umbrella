@@ -9,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  umbrella_annotation: ^1.0.0
+  umbrella_annotation: ^1.0.1
 
 
 dev_dependencies:
