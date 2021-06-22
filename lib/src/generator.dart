@@ -32,8 +32,7 @@ Future<String> _processLibrary(LibraryReader library, BuildStep buildStep) async
   String output = "";
 
   final annotationsOnLibrary = _moduleAnnotationChecker.annotationsOf(library.element);
-  logStorage.add(
-      LogLevel.debug, "Found ${annotationsOnLibrary.length} annotations on ${library.element.librarySource.uri}");
+  logStorage.add(LogLevel.debug, "Found ${annotationsOnLibrary.length} annotations on ${library.element.librarySource.uri}");
 
   if (annotationsOnLibrary.isEmpty) {
     // Dump debug message
@@ -54,7 +53,10 @@ Future<String> _processLibrary(LibraryReader library, BuildStep buildStep) async
 
     // Find all exportable items, ignore the path of the header file itself
     final exportableItems = (await _scanExportableItems(buildStep, headerAnnotation, logStorage))
-        .where((element) => element != library.element.source.uri);
+        .where((element) => element != library.element.source.uri)
+        .toList();
+
+    exportableItems.sort((a, b) => a.toString().compareTo(b.toString()));
 
     if (exportableItems.isEmpty) {
       print("Couldn't find any exportable libraries for Header in ${library.element.source.uri}\n"
@@ -78,12 +80,13 @@ Future<String> _processLibrary(LibraryReader library, BuildStep buildStep) async
 }
 
 Future<List<Uri>> _scanExportableItems(BuildStep buildStep, Header headerAnnotation, LogStorage logStorage) async {
-
   Glob include;
   Glob? exclude;
 
   if (headerAnnotation.include.isEmpty) {
-    logStorage.add(LogLevel.warning, "Found empty `include` glob list within @Header annotation, "
+    logStorage.add(
+        LogLevel.warning,
+        "Found empty `include` glob list within @Header annotation, "
         "consider adding at least one glob expression");
     return const [];
   } else if (headerAnnotation.include.length == 1) {
@@ -101,17 +104,13 @@ Future<List<Uri>> _scanExportableItems(BuildStep buildStep, Header headerAnnotat
   }
 
   // Fetch all assets
-  var allAssets = await buildStep
-      .findAssets(include)
-      .where((assetId) => assetId.uri.scheme == "package")
-      .toList();
+  var allAssets = await buildStep.findAssets(include).where((assetId) => assetId.uri.scheme == "package").toList();
 
   logStorage.add(LogLevel.debug, "Found ${allAssets.length} potentially exportable entries");
 
   // Filter out files which are not dart libraries
   var librariesToExport = <Uri>[];
   for (var assetId in allAssets) {
-
     if (exclude != null && exclude.matches(assetId.path)) {
       logStorage.add(LogLevel.debug, "Skipping ${assetId.uri.toString()}: excluded by `exclude` glob");
       continue;
